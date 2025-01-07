@@ -16,6 +16,9 @@ def fen_to_array(fen):
     return board_array
 
 
+def move_to_array(move):
+    return [move.from_square, move.to_square, move.promotion]
+
 def games_to_moves():
     X = []
     Y = []
@@ -27,7 +30,7 @@ def games_to_moves():
         board = pgn.board()
         for move in pgn.mainline_moves():
             X.append(fen_to_array(board.fen()))
-            Y.append(move.uci())
+            Y.append(move_to_array(move))
             board.push(move)
         pgn = chess.pgn.read_game(file)
         print(f'{len(X)} moves from {len(Y)} games out of {all_games} games')
